@@ -17,4 +17,9 @@
 
     <name>BungeeCord-Event</name>
     <description>Generic java event dispatching API intended for use with BungeeCord</description>
+
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+    </properties>
 </project>

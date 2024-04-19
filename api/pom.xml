@@ -18,6 +18,11 @@
     <name>BungeeCord-API</name>
     <description>API implemented by the Elastic Portal Suite</description>
 
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>net.md-5</groupId>

@@ -18,6 +18,11 @@
     <name>BungeeCord-Log</name>
     <description>Simplistic and performant java.util.Logger based logger and console API designed for use with BungeeCord and Minecraft related applications.</description>
 
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>jline</groupId>

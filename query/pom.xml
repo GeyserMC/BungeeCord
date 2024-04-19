@@ -18,6 +18,11 @@
     <name>BungeeCord-Query</name>
     <description>Minecraft query implementation based on the BungeeCord API.</description>
 
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>io.netty</groupId>

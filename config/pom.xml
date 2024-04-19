@@ -18,6 +18,11 @@
     <name>BungeeCord-Config</name>
     <description>Generic java configuration API intended for use with BungeeCord</description>
 
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
