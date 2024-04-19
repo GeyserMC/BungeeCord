@@ -12,6 +12,9 @@ jobs:
       contents: read
       packages: write
     steps:
+    - uses: tgymnich/fork-sync@v1.8
+      with:
+        owner: SpigotMC
     - uses: actions/checkout@v4
     - uses: actions/setup-java@v4
       with:
