@@ -18,6 +18,11 @@
     <name>BungeeCord-Native</name>
     <description>Optional native code to speed up and enhance BungeeCord functionality.</description>
 
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>io.netty</groupId>
