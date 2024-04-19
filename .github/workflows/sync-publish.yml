@@ -12,9 +12,11 @@ jobs:
       contents: read
       packages: write
     steps:
-    - uses: tgymnich/fork-sync@v1.8
+    - uses: dabreadman/sync-upstream-repo@v1.3.0
       with:
-        owner: SpigotMC
+        upstream_repo: https://github.com/SpigotMC/BungeeCord.git
+        upstream_branch: master
+        token: ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/checkout@v4
     - uses: actions/setup-java@v4
       with:
