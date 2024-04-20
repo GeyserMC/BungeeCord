@@ -20,7 +20,6 @@
 
     <properties>
         <checkstyle.skip>true</checkstyle.skip>
-        <maven.deploy.skip>true</maven.deploy.skip>
         <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
 
