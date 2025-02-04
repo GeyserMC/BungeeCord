@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 import lombok.RequiredArgsConstructor;
@@ -67,6 +68,15 @@ public abstract class DefinedPacket
 
         writeVarInt( b.length, buf );
         buf.writeBytes( b );
+    }
+
+    public static <T> T readStringMapKey(ByteBuf buf, Map<String, T> map)
+    {
+        String string = readString( buf );
+        T result = map.get( string );
+        Preconditions.checkArgument( result != null, "Unknown string key %s", string );
+
+        return result;
     }
 
     public static String readString(ByteBuf buf)
@@ -499,7 +509,7 @@ public abstract class DefinedPacket
 
     public static BitSet readFixedBitSet(int i, ByteBuf buf)
     {
-        byte[] bits = new byte[ ( i + 8 ) >> 3 ];
+        byte[] bits = new byte[ ( i + 7 ) >> 3 ];
         buf.readBytes( bits );
 
         return BitSet.valueOf( bits );
@@ -511,7 +521,7 @@ public abstract class DefinedPacket
         {
             throw new OverflowPacketException( "BitSet too large (expected " + size + " got " + bits.size() + ")" );
         }
-        buf.writeBytes( Arrays.copyOf( bits.toByteArray(), ( size + 8 ) >> 3 ) );
+        buf.writeBytes( Arrays.copyOf( bits.toByteArray(), ( size + 7 ) >> 3 ) );
     }
 
     public void read(ByteBuf buf)
