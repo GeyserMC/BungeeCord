@@ -154,7 +154,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <phase>process-classes</phase>
@@ -272,6 +272,15 @@
                 </pluginManagement>
             </build>
         </profile>
+        <profile>
+            <id>jdk-21-proc</id>
+            <activation>
+                <jdk>[21,)</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.proc>full</maven.compiler.proc>
+            </properties>
+        </profile>        
         <profile>
             <id>dist</id>
             <build>
