@@ -50,7 +50,6 @@ import net.md_5.bungee.netty.HandlerBoss;
 import net.md_5.bungee.netty.PipelineUtils;
 import net.md_5.bungee.protocol.ChatSerializer;
 import net.md_5.bungee.protocol.DefinedPacket;
-import net.md_5.bungee.protocol.Either;
 import net.md_5.bungee.protocol.PacketWrapper;
 import net.md_5.bungee.protocol.Protocol;
 import net.md_5.bungee.protocol.ProtocolConstants;
@@ -62,9 +61,11 @@ import net.md_5.bungee.protocol.packet.PlayerListHeaderFooter;
 import net.md_5.bungee.protocol.packet.PluginMessage;
 import net.md_5.bungee.protocol.packet.SetCompression;
 import net.md_5.bungee.protocol.packet.ShowDialog;
+import net.md_5.bungee.protocol.packet.ShowDialogDirect;
 import net.md_5.bungee.protocol.packet.StoreCookie;
 import net.md_5.bungee.protocol.packet.SystemChat;
 import net.md_5.bungee.protocol.packet.Transfer;
+import net.md_5.bungee.protocol.util.Either;
 import net.md_5.bungee.tab.ServerUnique;
 import net.md_5.bungee.tab.TabList;
 import net.md_5.bungee.util.CaseInsensitiveSet;
@@ -114,6 +115,14 @@ public final class UserConnection implements ProxiedPlayer
     // Used for trying multiple servers in order
     @Setter
     private Queue<String> serverJoinQueue;
+    @Getter
+    @Setter
+    private boolean bundling;
+
+    public void toggleBundling()
+    {
+        bundling = !bundling;
+    }
     /*========================================================================*/
     private final Collection<String> groups = new CaseInsensitiveSet();
     private final Collection<String> permissions = new CaseInsensitiveSet();
@@ -383,7 +392,6 @@ public final class UserConnection implements ProxiedPlayer
         ChannelFutureListener listener = new ChannelFutureListener()
         {
             @Override
-            @SuppressWarnings("ThrowableResultIgnored")
             public void operationComplete(ChannelFuture future) throws Exception
             {
                 if ( callback != null )
@@ -843,6 +851,12 @@ public final class UserConnection implements ProxiedPlayer
     public void showDialog(Dialog dialog)
     {
         Preconditions.checkState( getPendingConnection().getVersion() >= ProtocolConstants.MINECRAFT_1_21_6, "Dialogs are only supported in 1.21.6 and above" );
+
+        if ( ch.getEncodeProtocol() == Protocol.CONFIGURATION )
+        {
+            unsafe.sendPacket( new ShowDialogDirect( dialog ) );
+            return;
+        }
 
         unsafe.sendPacket( new ShowDialog( Either.right( dialog ) ) );
     }

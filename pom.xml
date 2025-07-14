@@ -5,7 +5,7 @@
 
     <groupId>net.md-5</groupId>
     <artifactId>bungeecord-parent</artifactId>
-    <version>1.21-R0.3-SNAPSHOT</version>
+    <version>1.21-R0.4-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>BungeeCord-Parent</name>
@@ -45,6 +45,7 @@
         <module>serializer</module>
         <module>slf4j</module>
         <module>native</module>
+        <module>nbt</module>
     </modules>
 
     <scm>
@@ -98,14 +99,8 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>33.3.1-jre</version>
+            <version>33.4.8-jre</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>findbugs-annotations</artifactId>
-            <version>3.0.1</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
@@ -181,7 +176,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>animal-sniffer-maven-plugin</artifactId>
-                <version>1.23</version>
+                <version>1.24</version>
                 <executions>
                     <execution>
                         <phase>process-classes</phase>
@@ -282,7 +277,7 @@
             <properties>
                 <maven.compiler.proc>full</maven.compiler.proc>
             </properties>
-        </profile>        
+        </profile>
         <profile>
             <id>dist</id>
             <build>
